@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<window title="Treatment List" border="normal" id="TreatmentWindow" apply="${treatmentRecordsCtrl}">
+
+<n:table width="100%">
+	<n:tr>
+		<n:td align="right">
+			<label id="label_PatientRef" value="Patient" />
+		</n:td>
+		<n:td>
+			<bandbox id="bandbox_Patient" width="200px" readonly="true">
+				<bandpopup width="500px">
+					<n:table width="100%">
+						<n:tr>
+							<n:td width="30%">
+								<label value="Patient Name" />
+							</n:td>
+							<n:td>
+								<textbox id="textbox_SearchPatientName" width="100%"/>
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="Tocken Number" />
+							</n:td>
+							<n:td>
+								<textbox id="textbox_SearchEmployeTockenNumber" width="100%"/>
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td ></n:td>
+							<n:td >
+								<button id="button_Search" label="Search" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td colspan="2">
+								<listbox id="listbox_PatientSearch">
+									<listhead>
+										<listheader label="Patient Name"></listheader>
+										<listheader label="Relatione"></listheader>
+										<listheader label="Employee Contact"></listheader>
+									</listhead>
+								</listbox>
+							</n:td>
+						</n:tr>
+					</n:table>
+					
+				</bandpopup>
+			</bandbox>
+		</n:td>
+		<n:td align="right">
+			<label id="label_TockenNo" value="Tocken Number" />
+		</n:td>
+		<n:td>
+			<textbox width="400px" maxlength="200" id="textbox_TockenNumber"/>
+		</n:td>
+	</n:tr>
+	
+	<n:tr>
+		<n:td align="right">
+			<label id="label_TreatmentDateFrom" value="Visit Date From" />
+		</n:td>
+		<n:td>
+			<datebox id="datebox_TratementDateFrom" width="200px"  />
+		</n:td>
+		<n:td align="right">
+			<label id="label_TreatmentDateTo" value="Visit Date To" />
+		</n:td>
+		<n:td>
+			<datebox id="datebox_TratementDateTo" width="200px" />
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td>
+		
+		</n:td>
+		<n:td></n:td>
+		<n:td></n:td>
+		<n:td>
+			<button id="button_SearchRecords" label="Search" />
+		</n:td>
+	</n:tr>
+</n:table>
+<paging id="paging_TreatmentRecords" />
+<listbox width="100%" id="listbox_TreatmentRecords" >
+	<listhead>
+		<listheader label="Visit Date" width="10%" sort="auto(treatmentDate)"></listheader>
+		<listheader label="Tocken no" width="10%" sort="auto(tockenNo)"></listheader>
+		<listheader label="Employee Name" width="20%" sort="auto(patient.employee.employeeName)"></listheader>
+		<listheader label="Patient Name" width="20%"  sort="auto(patient.patientName)"></listheader>
+		<listheader label="Relation" width="10%" sort="auto(patient.relation)"></listheader>
+		<listheader label="Treatment" width="30%" ></listheader>
+	</listhead>
+</listbox>
+</window>
+</zk>

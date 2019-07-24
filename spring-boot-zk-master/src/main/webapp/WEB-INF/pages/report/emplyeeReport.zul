@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<window title="Employee" border="normal" id="patientWindow">
+<n:table width="100%">
+	<n:tr>
+		<n:td align="right">
+			<label id="label_employeeName" value="Employee Name" />
+		</n:td>
+		<n:td>
+			<textbox width="400px" maxlength="200" id="textbox_EmployeeName"/>
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td align="right">
+			<label id="label_employeeAddress" value="Employee Address" />
+		</n:td>
+		<n:td>
+			<textbox width="400px" maxlength="500" multiline="true" rows="3" id="textbox_EmployeeAddress"/>
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td align="right">
+			<label id="label_employeeContact" value="Employee Contact" />
+		</n:td>
+		<n:td>
+			<decimalbox width="400px" maxlength="10" id="decimalbox_EmployeeContact"  />
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td></n:td>
+		<n:td>
+			<button id="button_SaveEmployee" label="Save" />
+		</n:td>
+	</n:tr>
+</n:table>
+</window>
+</zk>

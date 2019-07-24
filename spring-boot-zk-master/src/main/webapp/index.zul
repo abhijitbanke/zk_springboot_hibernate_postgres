@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<window title="Patient Management" border="normal" width="100%" id="window" apply="${indexCtrl}">
+
+<n:table width="100%">
+	<n:tr valign="top">
+		<n:td width="200px">
+			<menubar height="400px" width="200px" id="menubar">
+				<menu id="menu_Masters" label="Master"  >
+					<menupopup id="menupopup">
+						<menuitem id="menuItem_Employee" label="Employee" forward="onClick=onSelectMenuitem" />
+						<menuitem id="menuItem_Patient" label="Patient" forward="onClick=onSelectMenuitem" />
+						<menuitem id="menuItem_Treatment" label="Treatment" forward="onClick=onSelectMenuitem"  />
+					</menupopup>
+				</menu>
+				<menu label="Report"  >
+					<menupopup >
+						<menuitem id="menuItem_EmployeeReport" label="Employee" forward="onClick=onSelectMenuitem" />
+						<menuitem id="menuItem_PatientReport" label="Patient" forward="onClick=onSelectMenuitem" />
+						<menuitem id="menuItem_TreatmentReport" label="Treatment" forward="onClick=onSelectMenuitem"  />
+					</menupopup>
+				</menu>
+			</menubar>
+		</n:td>
+		<n:td>
+		
+			<include id="include" />
+		</n:td>
+		
+	</n:tr>
+</n:table>
+		
+			
+			
+		
+	
+
+
+<label value="You are using: ${desktop.webApp.version}"/>
+
+</window>
+</zk>

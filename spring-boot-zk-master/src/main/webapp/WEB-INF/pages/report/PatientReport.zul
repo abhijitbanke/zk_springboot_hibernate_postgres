@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<window title="Patient" border="normal" id="patientWindow">
+<n:table width="100%">
+	<n:tr>
+		<n:td align="right">
+			<label id="label_EmployeeRef" value="Employee Referance" />
+		</n:td>
+		<n:td>
+			<bandbox id="bandbox_EmployeeRef" width="400px" readonly="true">
+				<bandpopup width="300px">
+					<n:table width="100%">
+						<n:tr>
+							<n:td width="30%">
+								<label value="Emp. Name" />
+							</n:td>
+							<n:td>
+								<textbox id="textbox_SearchEmployeeName" width="100%"/>
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="Emp. Contact" />
+							</n:td>
+							<n:td>
+								<textbox id="textbox_SearchEmployeContact" width="100%"/>
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td ></n:td>
+							<n:td >
+								<button id="button_Search" label="Search" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td colspan="2">
+								<listbox id="listbox_EmployeeRef">
+									<listhead>
+										<listheader label="Employee Name"></listheader>
+										<listheader label="Employee Contact"></listheader>
+									</listhead>
+								</listbox>
+							</n:td>
+						</n:tr>
+					</n:table>
+					
+				</bandpopup>
+			</bandbox>
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td align="right">
+			<label id="label_PatientName" value="Patient Name" />
+		</n:td>
+		<n:td>
+			<textbox width="400px" maxlength="200" id="textbox_PatientName"/>
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td align="right">
+			<label id="label_Relation" value="Relation" />
+		</n:td>
+		<n:td>
+			<combobox id="combobox_Relation" width="300px">
+				<comboitem id="comboitem_Self">Self</comboitem>
+				<comboitem id="comboitem_Spouse">Spouse</comboitem>
+				<comboitem id="comboitem_Sone">Son</comboitem>
+				<comboitem id="comboitem_Doughter">Doughter</comboitem>
+			</combobox>
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td align="right">
+			<label id="label_PatientDOB" value="Patient DOB" />
+		</n:td>
+		<n:td>
+			<datebox id="datebox_DOB" width="300px" constraint="no empty;no future" />
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td></n:td>
+		<n:td>
+			<button id="button_SavePatient" label="Save" />
+		</n:td>
+	</n:tr>
+</n:table>
+</window>
+</zk>

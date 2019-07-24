@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<window title="Treatment" border="normal" id="TreatmentWindow" apply="${treatmentCtrl}">
+<n:table width="100%">
+	<n:tr>
+		<n:td align="right">
+			<label id="label_PatientRef" value="Patient" />
+		</n:td>
+		<n:td>
+			<bandbox id="bandbox_Patient" width="400px" readonly="true">
+				<bandpopup width="405px">
+					<n:table width="100%">
+						<n:tr>
+							<n:td width="30%">
+								<label value="Patient Name" />
+							</n:td>
+							<n:td>
+								<textbox id="textbox_SearchPatientName" width="70%"/>
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td>
+								<label value="Tocken Number" />
+							</n:td>
+							<n:td>
+								<textbox id="textbox_SearchEmployeTockenNumber" width="70%"/>
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td ></n:td>
+							<n:td >
+								<button id="button_Search" label="Search" />
+							</n:td>
+						</n:tr>
+						<n:tr>
+							<n:td colspan="2">
+								<div width="400px">
+									<paging id="paging_PatientSearch" width="400px"/>
+									<listbox id="listbox_PatientSearch" width="400px">
+										<listhead>
+											<listheader label="Patient Name" sort="auto(patientName)" width="200px"></listheader>
+											<listheader label="Relatione" sort="auto(relation)"></listheader>
+											<listheader label="Tocken Number" sort="auto(employee.employeeTockenNumber)"></listheader>
+										</listhead>
+									</listbox>
+								</div>
+							</n:td>
+						</n:tr>
+					</n:table>
+					
+				</bandpopup>
+			</bandbox>
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td align="right">
+			<label id="label_TockenNo" value="Tocken Number" />
+		</n:td>
+		<n:td>
+			<textbox width="400px" maxlength="200" id="textbox_TockenNumber" readonly="true"/>
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td align="right">
+			<label id="label_Description" value="Treatment Description" />
+		</n:td>
+		<n:td>
+			<textbox id="textbox_TreatmentDescription" width="400px" rows="4" maxlength="500" />
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td align="right">
+			<label id="label_TreatmentDate" value="Visit Date" />
+		</n:td>
+		<n:td>
+			<datebox id="datebox_TratementDate" width="300px" constraint="no empty;no future" onCreate="self.value = new Date()"/>
+		</n:td>
+	</n:tr>
+	<n:tr>
+		<n:td></n:td>
+		<n:td>
+			<button id="button_SaveTreatment" label="Save" />
+		</n:td>
+	</n:tr>
+</n:table>
+</window>
+</zk>
