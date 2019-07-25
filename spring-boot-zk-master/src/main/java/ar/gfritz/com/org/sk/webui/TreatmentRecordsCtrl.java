@@ -1,12 +1,16 @@
 package ar.gfritz.com.org.sk.webui;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.sys.ComponentsCtrl;
@@ -26,12 +30,10 @@ import org.zkoss.zul.Window;
 
 import ar.gfritz.com.org.sk.HibernateSearchObject;
 import ar.gfritz.com.org.sk.PagedListWrapper;
-import ar.gfritz.com.org.sk.bean.Employee;
 import ar.gfritz.com.org.sk.bean.Patient;
 import ar.gfritz.com.org.sk.bean.Treatment;
 import ar.gfritz.com.org.sk.webui.dao.EmployeeRepo;
 import ar.gfritz.com.org.sk.webui.dao.PatientRepo;
-import ar.gfritz.com.org.sk.webui.dao.PatientSpecifications;
 import ar.gfritz.com.org.sk.webui.dao.TreatmentRepo;
 
 import com.googlecode.genericdao.search.Filter;
@@ -64,6 +66,11 @@ public class TreatmentRecordsCtrl extends GenericForwardComposer<Window> {
 	EmployeeRepo employeeRepo;
 	@Autowired
 	PagedListWrapper<Treatment> pagedListWrapper;
+	
+	@Autowired
+	PagedListWrapper<Patient> pagedListWrapperForPatient;
+	
+	Paging paging_PatientSearch;
 	
 	public void onCreate$TreatmentWindow(Event event) {
 		System.out.println("OnCreate window");
@@ -135,54 +142,53 @@ public class TreatmentRecordsCtrl extends GenericForwardComposer<Window> {
 
 	public void onClick$button_Search(Event event) {
 		System.out.println("onClick$button_Search");
-//		PatientDao patientDao = new PatientDao();
-		
-		Patient patient = new Patient();
-		patient.setPatientName(textbox_SearchPatientName.getValue());
-		Employee exmapleEmployee = new Employee();
-		exmapleEmployee.setEmployeeTockenNumber(textbox_SearchEmployeTockenNumber.getValue());
-		/*
-		 * Employee exampleEmployee = new Employee();
-		 * exampleEmployee.setEmployeeName(textbox_SearchEmployeeName.getValue());
-		 * exampleEmployee.setEmployeeContact(textbox_SearchEmployeContact.getValue());
-		 */
-		
-		List<Patient> list =  patientRepo.findAll(new PatientSpecifications(patient));   ///patientDao.getPatientsByExample(patient, exmapleEmployee);
-		listbox_PatientSearch.setModel(new ListModelList<Patient>(list));
+		HibernateSearchObject<Patient> hso = new HibernateSearchObject<Patient>(Patient.class);
+		hso.setDistinct(true);
+		hso.addFetch("employee");
+		if(!StringUtils.isEmpty(textbox_SearchPatientName.getValue())){
+			hso.addFilter(Filter.ilike("patientName", "%"+textbox_SearchPatientName.getValue()+"%"));
+		}
+		if(!StringUtils.isEmpty(textbox_SearchEmployeTockenNumber.getValue())){
+			hso.addFilter(Filter.ilike("employee.employeeTockenNumber", "%"+textbox_SearchEmployeTockenNumber.getValue()+"%"));
+		}
+		pagedListWrapperForPatient.init(hso, listbox_PatientSearch, paging_PatientSearch);
 		
 	}
 	
 	
-	/*public void onClick$button_Print(Event event) throws Exception {
+	public void onClick$button_Print(Event event) throws Exception {
 		System.out.println("onClick$button_Print");
 		doPrint();
 	}
 	
 	
 	private void doPrint() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		HibernateSearchObject<Treatment> hos = getHibernateSearchObject();
 		List<Treatment> list = pagedListWrapper.getPagedListService().getBySearchObject(hos);
 		
-		String reportPath = "/jasper/";
+		String reportPath = "/WEB-INF/report/treatmentReport.jasper";
 		Map<String, Object> repParams = new HashMap<String, Object>();
+		repParams.put("visitDateFrom",datebox_TratementDateFrom.getValue() != null ? sdf.format( datebox_TratementDateFrom.getValue()) : "");
+		repParams.put("visitDateTo",datebox_TratementDateFrom.getValue() != null ? sdf.format( datebox_TratementDateFrom.getValue()) : "");
 		repParams.put("HIDE_EXPORT_EXCEL_BUTTON", false);
+		repParams.put("PARAMETERS_MAP", repParams);
+		repParams.put("BEANLIST", list);
+		repParams.put("REPORT_PATH", reportPath);
+		repParams.put("TITLE", "Treatment Report");
+		repParams.put("WINDOW_WIDTH", "100%");
+		repParams.put("WINDOW_HEIGHT", "100%");
+		repParams.put("printedBy", "Dr. S. K. ");
 		Component comp = null;
 		try {
-			comp = Executions.createComponents(
-					"/WEB-INF/reportZul.zul", null, null);
-			comp.setAttribute("PARAMETERS_MAP", repParams);
-			comp.setAttribute("BEANLIST", list);
-			comp.setAttribute("REPORT_PATH", reportPath);
-			comp.setAttribute("TITLE", "Original Prescription");
-			comp.setAttribute("WINDOW_WIDTH", "100%");
-			comp.setAttribute("WINDOW_HEIGHT", "100%");
+			comp = Executions.createComponents("/WEB-INF/pages/reportZul.zul", null, repParams);
 			if (comp instanceof Window) {
 				((Window) comp).doModal();
 			}
-		} catch (UiException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 
 
 	public void onClick$button_SearchRecords(Event event) throws Exception {

@@ -78,7 +78,7 @@ xmlns:n="http://www.zkoss.org/2005/zk/native"
 	</n:tr>
 	<n:tr>
 		<n:td>
-		
+		<button id="button_Print" label="Print" />
 		</n:td>
 		<n:td></n:td>
 		<n:td></n:td>

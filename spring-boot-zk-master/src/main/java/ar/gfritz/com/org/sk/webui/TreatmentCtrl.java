@@ -1,7 +1,5 @@
 package ar.gfritz.com.org.sk.webui;
 
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,16 +21,14 @@ import org.zkoss.zul.Paging;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import com.googlecode.genericdao.search.Filter;
-
 import ar.gfritz.com.org.sk.HibernateSearchObject;
 import ar.gfritz.com.org.sk.PagedListWrapper;
-import ar.gfritz.com.org.sk.bean.Employee;
 import ar.gfritz.com.org.sk.bean.Patient;
 import ar.gfritz.com.org.sk.bean.Treatment;
 import ar.gfritz.com.org.sk.webui.dao.PatientRepo;
-import ar.gfritz.com.org.sk.webui.dao.PatientSpecifications;
 import ar.gfritz.com.org.sk.webui.dao.TreatmentRepo;
+
+import com.googlecode.genericdao.search.Filter;
 
 @Component("treatmentCtrl")
 @Scope("prototype")

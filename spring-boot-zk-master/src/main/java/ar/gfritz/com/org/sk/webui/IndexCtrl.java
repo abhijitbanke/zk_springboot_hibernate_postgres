@@ -23,6 +23,7 @@ public class IndexCtrl extends GenericForwardComposer<Window> {
 	Menupopup menupopup;
 	Menuitem menuItem_Employee, menuItem_Patient, menuItem_Treatment, menuItem_EmployeeReport, menuItem_PatientReport, menuItem_TreatmentReport;
 	Include include;
+	
 	public void onCreate$window(Event event) {
 		System.out.println("OnCreate window");
 	}

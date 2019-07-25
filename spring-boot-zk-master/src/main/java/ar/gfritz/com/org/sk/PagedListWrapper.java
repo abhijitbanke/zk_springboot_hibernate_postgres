@@ -46,7 +46,7 @@ import com.googlecode.genericdao.search.SearchResult;
  * @author Stephan Gerth
  */
 @Configuration("pagedListWrapper")
-public class PagedListWrapper<E> extends ListModelList<E> implements Serializable {
+public class PagedListWrapper<E> extends ListModelList implements Serializable {
 
 	private static final long serialVersionUID = -7399762307122148637L;
 	static final Logger logger = Logger.getLogger(PagedListWrapper.class);
